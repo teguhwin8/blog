@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-scrollbar {
+	@apply scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-gray-200 scrollbar-track-transparent hover:scrollbar-track-gray-100;
+}
+
+.tag {
+	@apply bg-gray-100 text-gray-500 hover:text-black hover:bg-gray-200 rounded-xl py-1 px-3 text-xs;
+}
+
+.ellipsis {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.ellipsis-2 {
+	-webkit-line-clamp: 2;
+}
+.ellipsis-3 {
+	-webkit-line-clamp: 3;
+}
