@@ -7,7 +7,7 @@
 }
 
 .tag {
-	@apply bg-gray-100 text-gray-500 hover:text-black hover:bg-gray-200 rounded-xl py-1 px-3 text-xs;
+	@apply bg-gray-200 text-gray-500 hover:text-black hover:shadow-xl rounded-xl py-1 px-3 text-xs;
 }
 
 .ellipsis {

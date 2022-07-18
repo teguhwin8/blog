@@ -18,32 +18,44 @@ export default function Post() {
 			</div>
 			<Link href="/post/slug">
 				<a>
-					<div className="py-6 flex items-center justify-between">
-						<div className="flex-1">
-							<h1 className="text-2xl font-medium ellipsis ellipsis-2 mb-3">
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem
-								possimus neque quod, reiciendis corporis sed officia illo dolore
-								dolores, facilis numquam harum mollitia amet et sequi
-								voluptates! Iste, ad ea.
-							</h1>
-							<p className="text-gray-500 ellipsis ellipsis-3">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
-								qui dolor voluptate temporibus rem cumque vitae hic, similique
-								et maiores sit fuga assumenda praesentium aliquam repellendus
-								quas dolorem ea itaque. Lorem ipsum dolor sit amet consectetur
-								adipisicing elit. Quia possimus ipsam modi voluptatibus
-								distinctio vero non sit officiis tenetur fuga reprehenderit
-								velit ut illum facere, adipisci beatae obcaecati praesentium et?
-							</p>
-						</div>
-						<div className="pl-3">
+					<div className="py-6">
+						<div className="aspect-w-16 aspect-h-9 block md:hidden mb-5">
 							<Image
-								className="rounded-xl object-cover"
-								src="/writer.jpg"
+								className="rounded-xl"
+								src="/post.jpg"
 								alt="post image"
-								width={140}
-								height={140}
+								layout="fill"
+								objectFit="cover"
 							/>
+						</div>
+						<div className="flex items-center justify-between">
+							<div className="flex-1">
+								<h1 className="text-2xl font-medium ellipsis ellipsis-2 mb-3">
+									Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+									Quidem possimus neque quod, reiciendis corporis sed officia
+									illo dolore dolores, facilis numquam harum mollitia amet et
+									sequi voluptates! Iste, ad ea.
+								</h1>
+								<p className="text-gray-500 ellipsis ellipsis-3">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
+									qui dolor voluptate temporibus rem cumque vitae hic, similique
+									et maiores sit fuga assumenda praesentium aliquam repellendus
+									quas dolorem ea itaque. Lorem ipsum dolor sit amet consectetur
+									adipisicing elit. Quia possimus ipsam modi voluptatibus
+									distinctio vero non sit officiis tenetur fuga reprehenderit
+									velit ut illum facere, adipisci beatae obcaecati praesentium
+									et?
+								</p>
+							</div>
+							<div className="pl-3 hidden md:block">
+								<Image
+									className="rounded-xl object-cover"
+									src="/post.jpg"
+									alt="post image"
+									width={140}
+									height={140}
+								/>
+							</div>
 						</div>
 					</div>
 				</a>
