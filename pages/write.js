@@ -1,10 +1,10 @@
 import Layout from "../components/layout";
 
-export default function Home() {
+export default function Write() {
 	return (
 		<Layout>
 			<div className="py-8">
-				Home
+				Write
 			</div>
 		</Layout>
 	);
