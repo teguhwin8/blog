@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	let { title, slug, content } = req.body;
 
 	if (!title || !content || title == "" || content == "") {
-		return res.status(400).json({ message: "Title and content are required" });
+		return res.status(400).json({ message: "Judul dan konten wajib diisi" });
 	}
 
 	if (title.length <= 15) {
