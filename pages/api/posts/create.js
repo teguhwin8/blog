@@ -3,7 +3,7 @@ var slugify = require("slugify");
 
 export default async function handler(req, res) {
 	if (req.method !== "POST") {
-		res.status(405).json({ message: "Method are not allowed" }).end();
+		res.status(405).json({ message: `Method ${req.method} are not allowed` }).end();
 	}
 
 	let { title, slug, content } = req.body;
