@@ -3,22 +3,21 @@ var slugify = require("slugify");
 
 export default async function handler(req, res) {
 	if (req.method !== "POST") {
-		res.status(405).json({ message: `Method ${req.method} are not allowed` });
-		res.end();
+		return res.status(405).json({ message: `Method ${req.method} are not allowed` });
 	}
 
 	let { title, slug, content } = req.body;
 
 	if (!title || !content || title == "" || content == "") {
-		res.status(400).json({ message: "Title and content are required" });
+		return res.status(400).json({ message: "Title and content are required" });
 	}
 
 	if (title.length <= 15) {
-		res.status(400).json({ message: "Judul harus lebih dari 15 karakter." });
+		return res.status(400).json({ message: "Judul harus lebih dari 15 karakter." });
 	}
 
 	if (content.length <= 100) {
-		res.status(400).json({ message: "Konten harus lebih dari 100 karakter" });
+		return res.status(400).json({ message: "Konten harus lebih dari 100 karakter" });
 	}
 
 	slug = slugify(slug ? slug : title, { lower: true, strict: true });
@@ -38,7 +37,7 @@ export default async function handler(req, res) {
 			content,
 		});
 	} catch (error) {
-		res.status(400).json({ message: error.sqlMessage ?? "Server error" });
+		return res.status(400).json({ message: error.sqlMessage ?? "Server error" });
 	}
 
 	res.status(201).json({
