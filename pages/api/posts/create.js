@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 		return res.status(400).json({ message: error.sqlMessage ?? "Server error" });
 	}
 
-	res.status(201).json({
+	return res.status(201).json({
 		message: "Berhasil menyimpan artikel",
 	});
 }
