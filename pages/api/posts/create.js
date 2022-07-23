@@ -31,11 +31,14 @@ export default async function handler(req, res) {
 	}
 
 	try {
-		await db("posts").insert({
-			title,
-			slug,
-			content,
-		});
+		for (let i = 0; i < 1000; i++) {
+			await db("posts").insert({
+				title: title + '-' + i,
+				slug: slug + '-' + i,
+				content,
+			});
+		}
+		
 	} catch (error) {
 		return res.status(400).json({ message: error.sqlMessage ?? "Server error" });
 	}
