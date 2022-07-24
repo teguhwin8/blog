@@ -12,7 +12,9 @@
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "dotenv": "^16.0.1",
+    "excerpt-html": "^1.2.2",
     "knex": "^2.2.0",
+    "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "next": "12.2.2",
     "nextjs-progressbar": "^0.0.14",
