@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 			.json({ message: `Method ${req.method} are not allowed` });
 	}
 
-	let { email, password, name } = req.body;
+	let { email, password, name, passwordConfirmation } = req.body;
 
 	// if email or password is empty
 	if (!email || !password || email == "" || password == "") {
@@ -28,6 +28,13 @@ export default async function handler(req, res) {
 	// If user already exists, return error
 	if (user) {
 		return res.status(400).json({ message: "Email sudah terdaftar" });
+	}
+
+	// check password confirmation
+	if (password !== passwordConfirmation) {
+		return res
+			.status(400)
+			.json({ message: "Password tidak cocok" });
 	}
 
 	// If user doesn't exist, create new user

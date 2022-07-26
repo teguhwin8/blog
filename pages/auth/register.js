@@ -3,11 +3,12 @@ import Link from "next/link";
 import Logo from "../../components/logo";
 import { useRouter } from "next/router";
 
-export default function Login() {
-	const router = useRouter();
-	const [errorMessage, setErrorMessage] = useState(null);
+export default function Register() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [passwordConfirmation, setPasswordConfirmation] = useState("");
+	const [errorMessage, setErrorMessage] = useState(null);
+	const router = useRouter();
 
 	const inputEmailHandler = (e) => {
 		e.preventDefault();
@@ -19,15 +20,21 @@ export default function Login() {
 		setPassword(e.target.value);
 	};
 
-	const loginHandler = async (e) => {
+	const inputPasswordConfirmationHandler = (e) => {
+		e.preventDefault();
+		setPasswordConfirmation(e.target.value);
+	};
+
+	const registerHandler = async (e) => {
 		e.preventDefault();
 		const payload = {
 			email,
 			password,
+			passwordConfirmation,
 		};
 
-		const url = "/api/auth/login";
-		const loginRequest = await fetch(url, {
+		const url = "/api/auth/register";
+		const registerRequest = await fetch(url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -35,14 +42,15 @@ export default function Login() {
 			body: JSON.stringify(payload),
 		});
 
-		const response = await loginRequest.json();
+		const response = await registerRequest.json();
 
-		if (!loginRequest.ok) {
+		if (!registerRequest.ok) {
 			setErrorMessage(response.message);
 		} else {
 			setErrorMessage(null);
 			router.push({
-				pathname: "/",
+				pathname: "/auth/login",
+				query: { success: "true" },
 			});
 		}
 	};
@@ -54,17 +62,12 @@ export default function Login() {
 					<div className="py-6">
 						<Logo />
 					</div>
-					{router.query.success && (
-						<div className="px-3 py-2 bg-green-100 text-green-700 mb-4 text-sm rounded-lg">
-							{"Anda berhasil mendaftar, silahkan login"}
-						</div>
-					)}
 					{errorMessage && (
 						<div className="px-3 py-2 bg-red-100 text-red-700 mb-4 text-sm rounded-lg">
 							{errorMessage}
 						</div>
 					)}
-					<form onSubmit={loginHandler}>
+					<form onSubmit={registerHandler}>
 						<div className="mb-4">
 							<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
 								Email
@@ -89,19 +92,31 @@ export default function Login() {
 								onChange={inputPasswordHandler.bind(this)}
 							/>
 						</div>
+						<div className="mb-4">
+							<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+								Konfirmasi Password
+							</label>
+							<input
+								type="password"
+								className="text-input"
+								placeholder="Ulangi Password"
+								required
+								onChange={inputPasswordConfirmationHandler.bind(this)}
+							/>
+						</div>
 						<div className="my-6 flex justify-center">
 							<button
 								type="submit"
 								className="btn-default w-full tracking-widest"
 							>
-								LOGIN
+								DAFTAR SEKARANG
 							</button>
 						</div>
 						<div className="mb-4">
 							<p className="text-sm text-gray-400 text-center">
-								{"Belum punya akun?"}
-								<Link href="/auth/register">
-									<a className="link mx-1">Daftar</a>
+								{"Udah punya akun?"}
+								<Link href="/auth/login">
+									<a className="link mx-1">Masuk</a>
 								</Link>
 							</p>
 						</div>
