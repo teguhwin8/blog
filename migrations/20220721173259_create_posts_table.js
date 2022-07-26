@@ -8,7 +8,7 @@ exports.up = async function (knex) {
 		table.increments();
 		table.string("title").notNullable();
 		table.string("slug").notNullable().unique();
-		table.text("content").notNullable();
+		table.text("content", "longtext").notNullable();
 		table.timestamps(true, true);
 	});
 };
