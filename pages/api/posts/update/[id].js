@@ -1,5 +1,6 @@
 import db from "../../../../libs/db";
 import moment from "moment";
+import authorization from "../../../../middlewares/authorization";
 
 export default async function handler(req, res) {
 	if (req.method !== "PUT") {
@@ -8,11 +9,13 @@ export default async function handler(req, res) {
 			.json({ message: `Method ${req.method} are not allowed` });
 	}
 
+	const auth = await authorization(req, res);
+
 	const { id } = req.query;
 	const { title, content } = req.body;
 
 	if (!id) {
-		return res.status(404).json({ message: "Post not found" });
+		return res.status(404).json({ message: "Artikel tidak ditemukan" });
 	}
 
 	if (!title || !content || title == "" || content == "") {
@@ -34,7 +37,7 @@ export default async function handler(req, res) {
 	try {
 		const post = await db("posts").where({ id }).update({ title, content, updated_at: new Date() });
 		if (!post) {
-			return res.status(404).json({ message: "Post not found" });
+			return res.status(404).json({ message: "Artikel tidak ditemukan" });
 		}
 	} catch (error) {
 		return res

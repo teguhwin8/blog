@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 	const post = await db("posts").where({ slug }).first();
 
 	if (!post) {
-		return res.status(404).json({ message: "Post not found" });
+		return res.status(404).json({ message: "Artikel tidak ditemukan" });
 	}
 
 	moment.locale("id");

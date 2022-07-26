@@ -1,5 +1,5 @@
 import db from "../../../../libs/db";
-import moment from "moment";
+import authorization from "../../../../middlewares/authorization";
 
 export default async function handler(req, res) {
 	if (req.method !== "DELETE") {
@@ -8,19 +8,21 @@ export default async function handler(req, res) {
 			.json({ message: `Method ${req.method} are not allowed` });
 	}
 
+	const auth = await authorization(req, res);
+
 	const { id } = req.query;
 
 	if (!id) {
-		return res.status(404).json({ message: "Post not found" });
+		return res.status(404).json({ message: "Artikel tidak ditemukan" });
 	}
 
 	try {
 		const post = await db("posts").where({ id }).del();
 		if (!post) {
-			return res.status(404).json({ message: "Post not found" });
+			return res.status(404).json({ message: "Artikel tidak ditemukan" });
 		}
 		return res.status(200).json({
-			message: "Post deleted successfully",
+			message: "Artikel berhasil dihapus",
 		});
 	} catch (error) {
 		return res

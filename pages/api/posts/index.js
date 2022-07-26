@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 	const posts = await db("posts")
 		.offset(dataOffset)
 		.limit(perPage)
-		.orderBy("updated_at", "desc");
+		.orderBy("id", "desc");
 
 	moment.locale("id");
 	posts.map((post) => {
