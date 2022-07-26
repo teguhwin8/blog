@@ -2,6 +2,7 @@ import db from "../../../libs/db";
 var slugify = require("slugify");
 import moment from "moment";
 import excerptHtml from "excerpt-html";
+import authorization from "../../../middlewares/authorization";
 
 export default async function handler(req, res) {
 	if (req.method !== "POST") {
@@ -9,6 +10,8 @@ export default async function handler(req, res) {
 			.status(405)
 			.json({ message: `Method ${req.method} are not allowed` });
 	}
+
+	const auth = await authorization(req, res);
 
 	let { title, slug, content } = req.body;
 
