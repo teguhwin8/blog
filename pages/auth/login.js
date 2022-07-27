@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Logo from "../../components/logo";
 import { useRouter } from "next/router";
+import { VscLoading } from "react-icons/vsc";
 
 export default function Login() {
 	const router = useRouter();
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	const inputEmailHandler = (e) => {
 		e.preventDefault();
@@ -21,6 +23,7 @@ export default function Login() {
 
 	const loginHandler = async (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 		const payload = {
 			email,
 			password,
@@ -31,6 +34,8 @@ export default function Login() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Credentials": true,
 			},
 			body: JSON.stringify(payload),
 		});
@@ -45,6 +50,8 @@ export default function Login() {
 				pathname: "/",
 			});
 		}
+
+		setIsLoading(false);
 	};
 
 	return (
@@ -90,12 +97,27 @@ export default function Login() {
 							/>
 						</div>
 						<div className="my-6 flex justify-center">
-							<button
-								type="submit"
-								className="btn-default w-full tracking-widest"
-							>
-								LOGIN
-							</button>
+							{isLoading ? (
+								<button
+									type="submit"
+									className="btn-default w-full tracking-widest"
+									disabled
+								>
+									<div className="flex items-center justify-center">
+										{isLoading && (
+											<VscLoading className="mr-3 animate-spin w-6 h-6" />
+										)}
+										LOGIN
+									</div>
+								</button>
+							) : (
+								<button
+									type="submit"
+									className="btn-default w-full tracking-widest"
+								>
+									LOGIN
+								</button>
+							)}
 						</div>
 						<div className="mb-4">
 							<p className="text-sm text-gray-400 text-center">

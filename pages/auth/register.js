@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Logo from "../../components/logo";
 import { useRouter } from "next/router";
+import { VscLoading } from "react-icons/vsc";
 
 export default function Register() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirmation, setPasswordConfirmation] = useState("");
 	const [errorMessage, setErrorMessage] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 
 	const inputEmailHandler = (e) => {
@@ -27,6 +29,7 @@ export default function Register() {
 
 	const registerHandler = async (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 		const payload = {
 			email,
 			password,
@@ -53,6 +56,8 @@ export default function Register() {
 				query: { success: "true" },
 			});
 		}
+
+		setIsLoading(false);
 	};
 
 	return (
@@ -105,12 +110,27 @@ export default function Register() {
 							/>
 						</div>
 						<div className="my-6 flex justify-center">
-							<button
-								type="submit"
-								className="btn-default w-full tracking-widest"
-							>
-								DAFTAR SEKARANG
-							</button>
+						{isLoading ? (
+								<button
+									type="submit"
+									className="btn-default w-full tracking-widest"
+									disabled
+								>
+									<div className="flex items-center justify-center">
+										{isLoading && (
+											<VscLoading className="mr-3 animate-spin w-6 h-6" />
+										)}
+										DAFTAR
+									</div>
+								</button>
+							) : (
+								<button
+									type="submit"
+									className="btn-default w-full tracking-widest"
+								>
+									DAFTAR
+								</button>
+							)}
 						</div>
 						<div className="mb-4">
 							<p className="text-sm text-gray-400 text-center">
