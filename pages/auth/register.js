@@ -3,6 +3,7 @@ import Link from "next/link";
 import Logo from "../../components/logo";
 import { useRouter } from "next/router";
 import { VscLoading } from "react-icons/vsc";
+import Head from "next/head";
 
 export default function Register() {
 	const [email, setEmail] = useState("");
@@ -62,6 +63,9 @@ export default function Register() {
 
 	return (
 		<>
+			<Head>
+				<title>Register - HaloBlog</title>
+			</Head>
 			<div className="flex items-center justify-center w-screen h-screen p-8 overflow-auto custom-scrollbar bg-slate-100">
 				<div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-[400px]">
 					<div className="py-6">
@@ -110,7 +114,7 @@ export default function Register() {
 							/>
 						</div>
 						<div className="my-6 flex justify-center">
-						{isLoading ? (
+							{isLoading ? (
 								<button
 									type="submit"
 									className="btn-default w-full tracking-widest"

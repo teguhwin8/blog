@@ -19,12 +19,12 @@ export default async function handler(req, res) {
 
 	// check if user already exists
 	const user = await db("users").where({ email }).first();
-
-	// if user already exists, check password
-	if (user) {
+	if (!user) {
+		return res.status(400).json({ message: "Akun tidak ditemukan" });
+	} else {
 		const isMatch = bcrypt.compareSync(password, user.password);
 		if (!isMatch) {
-			return res.status(400).json({ message: "Password salah" });
+			return res.status(400).json({ message: "Email atau password tidak valid" });
 		} else {
 			const token = jwt.sign(
 				{ id: user.id, name: user.name, email: user.email },

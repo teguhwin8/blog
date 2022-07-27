@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "../../components/logo";
 import { useRouter } from "next/router";
 import { VscLoading } from "react-icons/vsc";
+import Head from "next/head";
+import { toast } from "react-toastify";
 
 export default function Login() {
 	const router = useRouter();
@@ -10,6 +12,13 @@ export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const isSuccess = router.query.success;
+		if (isSuccess) {
+			toast.success("Anda berhasil mendaftar, silahkan login");
+		}
+	}, [router.query.success]);
 
 	const inputEmailHandler = (e) => {
 		e.preventDefault();
@@ -43,7 +52,7 @@ export default function Login() {
 		const response = await loginRequest.json();
 
 		if (!loginRequest.ok) {
-			setErrorMessage(response.message);
+			toast.error(response.message);
 		} else {
 			setErrorMessage(null);
 			router.push({
@@ -56,16 +65,14 @@ export default function Login() {
 
 	return (
 		<>
+			<Head>
+				<title>Login - HaloBlog</title>
+			</Head>
 			<div className="flex items-center justify-center w-screen h-screen p-8 overflow-auto custom-scrollbar bg-slate-100">
 				<div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-[400px]">
 					<div className="py-6">
 						<Logo />
 					</div>
-					{router.query.success && (
-						<div className="px-3 py-2 bg-green-100 text-green-700 mb-4 text-sm rounded-lg">
-							{"Anda berhasil mendaftar, silahkan login"}
-						</div>
-					)}
 					{errorMessage && (
 						<div className="px-3 py-2 bg-red-100 text-red-700 mb-4 text-sm rounded-lg">
 							{errorMessage}
