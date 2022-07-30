@@ -17,8 +17,8 @@ export default function Home(props) {
 
 export async function getStaticProps() {
 	const client = contentful.createClient({
-		space: "cjrteoqcujc9",
-		accessToken: "Nw-tb4N6lpiz-inO6G501wmkjb27S1PuI5aNYdhfzpI",
+		space: process.env.SPACE_ID,
+		accessToken: process.env.ACCESS_TOKEN,
 	});
 
 	const entries = await client.getEntries({
