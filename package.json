@@ -12,6 +12,7 @@
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "bcryptjs": "^2.4.3",
+    "contentful": "^9.1.33",
     "dotenv": "^16.0.1",
     "excerpt-html": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
