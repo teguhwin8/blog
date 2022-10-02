@@ -1,32 +1,13 @@
+import Search from "./search";
+import Topic from "./topic";
+
 export default function Sidebar() {
-  return (
-    <>
-        <div>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-            <h1 className="text-6xl">Sidebar</h1>
-        </div>
-    </>
-  )
+	return (
+		<>
+			<div>
+				<Search />
+				<Topic />
+			</div>
+		</>
+	)
 }
